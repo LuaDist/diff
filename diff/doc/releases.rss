@@ -1,0 +1,14 @@
+<rss version="2.0">
+ <channel>
+  <title>Diff</title>
+  <description/>
+   <link>http://sputnik.freewisdom.org/lib/diff/</link>
+     
+   <item>
+    <link>http://sputnik.freewisdom.org/files/diff-$version.tar.gz</link>
+    <title>Diff 8.06.15</title>
+    <guid isPermalink="true">http://sputnik.freewisdom.org/files/diff-8.06.15.tar.gz</guid>
+    <description>the initial release</description>
+   </item>
+ </channel>
+</rss>

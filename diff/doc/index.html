@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="description" content="Diff: Diff functions"/>
+  <meta name="keywords" content="lua, diff"/>
+  <link rel="shortcut icon" href="http://media.freewisdom.org/etc/sputnik-icon.png"/>
+  <link rel="alternate" type="application/rss+xml" title="New releases of Diff" href='http://sputnik.freewisdom.org/lib/diff/releases.rss'/>
+  <title>Diff</title>
+  <style type="text/css">
+    body { color:#000; background:#fff; }
+    #header { width:100%;
+       text-align:center;  
+       border-top:solid #aaa 1px;
+       border-bottom:solid #aaa 1px;
+    }
+    #header p { margin-left:0; }
+    p { margin-left:3px; }
+    sup.return {font-size: small;}
+    a.return {text-decoration: none; color: gray;}
+    pre { background-color:#ffe; white-space:pre; padding-left:3ex; border-left: 1px solid gray; margin-left: 10px}
+
+    table.index { border: 1px #00007f; }
+    table.index td { text-align: left; vertical-align: top; }
+    table.index ul { padding-top: 0em; margin-top: 0em; }
+
+    table {
+     border: 1px solid black;
+	 border-collapse: collapse;
+     margin-left: auto;
+     margin-right: auto;
+    }
+    th {
+     border: 1px solid black;
+     padding: 0.5em;
+    }
+    td {
+     border: 1px solid black;
+     padding: 0.5em;
+    }
+    div.header, div.footer { margin-left: 0em; }
+  </style>
+</head>
+<body>
+ <div id="header">
+  <a name="top"></a>
+  <img border=0 alt="Diff logo" src="diff.png"/>
+  <p>Diff functions</p>
+  <p>
+   <a name="toc"></a><a href="#Overview">Overview</a> &middot; <a href="#Installation">Installation</a> &middot; <a href="#Using Diff">Using Diff</a> &middot; <a href="#Contact">Contact</a> &middot; <a href="#LuaDoc">LuaDoc</a> &middot; <a href="#License">License</a>
+  </p>
+ </div>
+ 
+
+<a name="Overview"></a><h1>Overview<sup class="return"><a class="return" href="#top">&uarr;</a></sup></h1>
+<p>     This module provides a small collection of functions for diffing text.
+</p>
+
+
+<a name="Installation"></a><h1>Installation<sup class="return"><a class="return" href="#top">&uarr;</a></sup></h1>
+
+<p>  The Diff library consists of a single file (diff.lua), plus a test script
+  (tests/basic.lua).  Just put the file somewhere in your Lua path.
+  Here is a list of recent releases:</p>
+
+<p>  <ul>
+  <li><a href="http://sputnik.freewisdom.org/files/diff-8.06.15.tar.gz">Diff-8.06.15</a> - the initial release (June 15, 2008) </li> 
+  </ul></p>
+
+<p>  You can also install it using LuaRocks with</p>
+
+<pre><code>luarocks install diff
+</code></pre>
+
+<p>  or:</p>
+
+<pre><code>luarocks --from=http://sputnik.freewisdom.org/rocks/earth install diff
+</code></pre>
+
+
+
+
+
+<a name="Using Diff"></a><h1>Using Diff<sup class="return"><a class="return" href="#top">&uarr;</a></sup></h1>
+
+
+<p>A simple diff of two strings:</p>
+
+<pre><code>&gt; require("diff")
+&gt; for _, token in ipairs(diff.diff("This is a test", "This was a test!")) do 
+&gt;&gt; print(token[1], token[2])
+&gt;&gt; end
+This    same
+is      out
+was     in
+        same
+a       same
+        same
+test    out
+test!   in
+        same
+</code></pre>
+
+<p>That is, diff.diff(old, new) returns a table of pairs, each consisting of a string
+and it's status: "same" (the string is present in both), "in" (the string appeared
+in <i>new</i>, or "out" (the string was present in <i>old</i> but was removed).</p>
+
+<p>Alternatively, you can just generate an HTML for this diff:</p>
+
+<pre><code>&gt; = diff.diff("This is a test", "This was a test!"):to_html()
+This &lt;del&gt;is&lt;/del&gt;&lt;ins&gt;was&lt;/ins&gt; a &lt;del&gt;test&lt;/del&gt;&lt;ins&gt;test!&lt;/ins&gt;
+</code></pre>
+
+
+
+
+
+<a name="Contact"></a><h1>Contact<sup class="return"><a class="return" href="#top">&uarr;</a></sup></h1>
+Please contact Yuri Takhteyev (yuri -at- freewisdom.org) with any questions.
+
+
+<a name="LuaDoc"></a><h1>LuaDoc<sup class="return"><a class="return" href="#top">&uarr;</a></sup></h1>
+ <table style="width:100%" class="function_list">
+   <tr>
+   <td colspan=2 style='background: #dddddd;'>
+    <h2>diff</h2>
+    <p>Provides functions for diffing text.  (c) 2007, 2008  Yuri Takhteyev (yuri@freewisdom.org) (c) 2007 Hisham Muhammad  License: MIT/X, see http://sputnik.freewisdom.org/en/License </p>
+    
+   </td>
+  </tr>
+     <tr>
+	<td class="name" width="300px" style="vertical-align: top;"><b>diff()</b></td>
+	<td class="summary" >Returns a diff of two strings as a list of pairs, where the first value represents a token and the second the token's status ("same", "in", "out").
+     <dl>
+      <dt><color="green"><b>old</b></font>: <dd>The "old" text string</dd></dt><dt><color="green"><b>new</b></font>: <dd>The "new" text string</dd></dt><dt><color="green"><b>separator</b></font>: <dd>[optional] the separator pattern (defaults ot any white space).</dd></dt>
+     </dl>
+     Returns: <font color="purple">A list of annotated tokens. </color>
+    </td>
+   </tr>
+     <tr>
+	<td class="name" width="300px" style="vertical-align: top;"><b>escape_html()</b></td>
+	<td class="summary" >Escapes an HTML string.
+     <dl>
+      <dt><color="green"><b>text</b></font>: <dd>The string to be escaped.</dd></dt>
+     </dl>
+     Returns: <font color="purple">Escaped string. </color>
+    </td>
+   </tr>
+     <tr>
+	<td class="name" width="300px" style="vertical-align: top;"><b>format_as_html()</b></td>
+	<td class="summary" >Formats an inline diff as HTML, with <ins> and <del> tags.
+     <dl>
+      <dt><color="green"><b>tokens</b></font>: <dd>a table of {token, status} pairs.</dd></dt>
+     </dl>
+     Returns: <font color="purple">an HTML string. </color>
+    </td>
+   </tr>
+     <tr>
+	<td class="name" width="300px" style="vertical-align: top;"><b>quick_LCS()</b></td>
+	<td class="summary" >Derives the longest common subsequence of two strings.
+     <dl>
+      <dt><color="green"><b>t1</b></font>: <dd>the first string.</dd></dt><dt><color="green"><b>t2</b></font>: <dd>the second string.</dd></dt>
+     </dl>
+     Returns: <font color="purple">the least common subsequence as a matrix. </color>
+    </td>
+   </tr>
+     <tr>
+	<td class="name" width="300px" style="vertical-align: top;"><b>split()</b></td>
+	<td class="summary" >Split a string into tokens.
+     <dl>
+      <dt><color="green"><b>text</b></font>: <dd>A string to be split.</dd></dt><dt><color="green"><b>separator</b></font>: <dd>[optional] the separator pattern (defaults to any white space - %s+).</dd></dt><dt><color="green"><b>skip_separator</b></font>: <dd>[optional] don't include the sepator in the results.</dd></dt>
+     </dl>
+     Returns: <font color="purple">A list of tokens. </color>
+    </td>
+   </tr>
+  
+ 
+ </table>
+
+
+
+<a name="License"></a><h1>License<sup class="return"><a class="return" href="#top">&uarr;</a></sup></h1>
+
+<p>Copyright (c) 2007, 2008 Yuri Takhteyev, Hisham Muhammad</p>
+
+<p>Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.</p>
+
+
+
+</body>
+</html>

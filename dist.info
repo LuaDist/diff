@@ -1,0 +1,14 @@
+--- This file is part of LuaDist project
+
+name = "diff"
+version = "8.06.15"
+
+desc = "This module provides a small collection of functions for diffing text."
+author = "Yuri Takhteyev"
+license = "MIT/X11"
+url = "http://spu.tnik.org/lib/diff/"
+maintainer = "Peter Kapec"
+
+depends = {
+	"lua ~> 5.1"
+}
