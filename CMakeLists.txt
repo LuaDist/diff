@@ -1,15 +1,16 @@
-# Copyright (C) 2007-2009 LuaDist.
-# Created by Peter Kapec
+# Copyright (C) 2007-2012 LuaDist.
+# Created by Peter Kapec, Peter Drahoš
 # Redistribution and use of this file is allowed according to the terms of the MIT license.
 # For details see the COPYRIGHT file distributed with LuaDist.
 # Please note that the package source code is licensed under its own license.
 
-PROJECT(diff NONE)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-INCLUDE(dist.cmake)
+project ( diff NONE )
+cmake_minimum_required ( VERSION 2.8 )
+include ( cmake/dist.cmake )
+include ( lua )
 
 # Install all files and documentation
-INSTALL (FILES lua/diff.lua DESTINATION ${INSTALL_LMOD})
-INSTALL (FILES LICENSE.txt DESTINATION ${INSTALL_DATA})
-INSTALL (DIRECTORY doc/ DESTINATION ${INSTALL_DOC})
-INSTALL (DIRECTORY tests/ DESTINATION ${INSTALL_TEST})
+install_lua_module ( diff lua/diff.lua )
+install_data ( LICENSE.txt )
+install_doc ( doc/ )
+install_test ( tests/ )
