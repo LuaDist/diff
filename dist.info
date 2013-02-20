@@ -1,0 +1,35 @@
+type = "x86"
+arch = "Windows"
+author = "Yuri Takhteyev"
+depends = {
+[[lua ~> 5.1]],
+}
+
+desc = "This module provides a small collection of functions for diffing text."
+version = "8.06.15"
+maintainer = "Peter Kapec"
+files = {
+Runtime = {
+[[lib\lua\diff.lua]],
+}
+,
+Documentation = {
+[[share\diff\doc\\diff.png]],
+[[share\diff\doc\\diff.xcf]],
+[[share\diff\doc\\index.html]],
+[[share\diff\doc\\releases.rss]],
+}
+,
+Data = {
+[[share\diff\LICENSE.txt]],
+}
+,
+Test = {
+[[share\diff\test\\basic.lua]],
+}
+,
+}
+
+license = "MIT/X11"
+name = "diff"
+url = "http://spu.tnik.org/lib/diff/"
